@@ -1,31 +1,28 @@
 public class Persona {
-    private static int contadorId = 1;
+    private boolean embarazada;
+    private boolean terceraEdad;
+    private boolean discapacidad;
+    private int minutoLlegada;
+    private Persona conocidoEnFila;
 
-    private final int id;
-    private final boolean preferente;
-    private final int minutoLlegada;
-    private final Persona conocidoEnFila;
-
-    public Persona(int minutoLlegada, boolean preferente) {
-        this.id = contadorId++;
+    public Persona(int minutoLlegada, boolean embarazada, boolean terceraEdad, boolean discapacidad) {
         this.minutoLlegada = minutoLlegada;
-        this.preferente = preferente;
-        this.conocidoEnFila = null;
+        this.embarazada = embarazada;
+        this.terceraEdad = terceraEdad;
+        this.discapacidad = discapacidad;
+        conocidoEnFila = null;
     }
 
-    public Persona(int minutoLlegada, boolean preferente, Persona conocidoEnFila) {
-        this.id = contadorId++;
+    public Persona(int minutoLlegada, boolean embarazada, boolean terceraEdad, boolean discapacidad, Persona conocidoEnFila) {
         this.minutoLlegada = minutoLlegada;
-        this.preferente = preferente;
+        this.embarazada = embarazada;
+        this.terceraEdad = terceraEdad;
+        this.discapacidad = discapacidad;
         this.conocidoEnFila = conocidoEnFila;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public boolean esPreferente() {
-        return preferente;
+    public boolean tieneDerechoPreferente() {
+        return embarazada || terceraEdad || discapacidad;
     }
 
     public int getMinutoLlegada() {
@@ -34,16 +31,5 @@ public class Persona {
 
     public Persona getConocidoEnFila() {
         return conocidoEnFila;
-    }
-
-    @Override
-    public String toString() {
-        if (preferente) {
-            return "[P" + id + "]"; 
-        }
-        if (conocidoEnFila != null) {
-            return "[C" + id + "]"; 
-        }
-        return "[N" + id + "]"; 
     }
 }
